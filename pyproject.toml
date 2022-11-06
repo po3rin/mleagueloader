@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "mleagueloader"
+version = "0.1.0"
+description = ""
+authors = ["Hiromu Nakamura <hiromu-nakamura@m3.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.11"
+pandas = "^1.5.1"
+bs4 = "^0.0.1"
+selenium = "^4.6.0"
+gokart = "^1.2.1"
+luigi = "^3.1.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.17.0"
+python-dotenv = "^0.21.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
