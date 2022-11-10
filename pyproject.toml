@@ -12,6 +12,7 @@ bs4 = "^0.0.1"
 selenium = "^4.6.0"
 gokart = "^1.2.1"
 luigi = "^3.1.1"
+mahjong = "^1.2.0"
 
 
 [tool.poetry.group.dev.dependencies]

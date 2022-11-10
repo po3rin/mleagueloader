@@ -601,6 +601,14 @@ prometheus = ["prometheus-client (>=0.5,<0.15)"]
 toml = ["toml (<2.0.0)"]
 
 [[package]]
+name = "mahjong"
+version = "1.2.0"
+description = "Mahjong hands calculation"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "matplotlib"
 version = "3.6.2"
 description = "Python plotting package"
@@ -1274,7 +1282,7 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.11"
-content-hash = "6b714498ccd6992045193b22acce7dde19fcc3eae327c802881a8dbe1fddcbc6"
+content-hash = "533a65ca63b0274529c54bacf05fe6ac668ce905fe1bc7166dee492980f93eda"
 
 [metadata.files]
 appnope = [
@@ -1679,6 +1687,10 @@ lockfile = [
 ]
 luigi = [
     {file = "luigi-3.1.1.tar.gz", hash = "sha256:29961582db2704d8df4ec01f6b8f7f0d529cc8f27cff67733ccd809299771218"},
+]
+mahjong = [
+    {file = "mahjong-1.2.0-py3-none-any.whl", hash = "sha256:6539c44ad41a32a60bfdf0c7cd466c658c32ad1ab6e1f4ec5220f8cb49ee54f4"},
+    {file = "mahjong-1.2.0.tar.gz", hash = "sha256:4de4fff5b90b590b94fa951a438df9ba71348b38719d35a3916fec5e5df84adf"},
 ]
 matplotlib = [
     {file = "matplotlib-3.6.2-cp310-cp310-macosx_10_12_universal2.whl", hash = "sha256:8d0068e40837c1d0df6e3abf1cdc9a34a6d2611d90e29610fa1d2455aeb4e2e5"},
