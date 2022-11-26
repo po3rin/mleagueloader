@@ -13,6 +13,8 @@ selenium = "^4.6.0"
 gokart = "^1.2.1"
 luigi = "^3.1.1"
 mahjong = "^1.2.0"
+pandas-gbq = "^0.17.9"
+google-cloud-bigquery = {extras = ["bqstorage", "pandas"], version = "^3.3.6"}
 
 
 [tool.poetry.group.dev.dependencies]
