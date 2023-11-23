@@ -20,6 +20,13 @@ def tehai_shanten(x):
     result = shanten.calculate_shanten(tiles)
     return result
 
+def agari_player(x):
+    if x['cmd'] != 'agari':
+        return x['player']
+    
+    if x['args'][0].startswith('ron'):
+        return x['args'][1]
+    return x['args'][0]
 
 def format_raw_data(df: pd.DataFrame) -> pd.DataFrame:
     # game dataframe ------
@@ -31,14 +38,14 @@ def format_raw_data(df: pd.DataFrame) -> pd.DataFrame:
     game_df['gameid'] = game_df.apply(lambda x: x['args'][0].replace('id=', '') if x['cmd'] == 'gamestart' else None, axis=1)
     game_df['kyokuid'] = game_df.apply(lambda x: '_'.join(x['args']) if x['cmd'] == 'kyokustart' else None, axis=1)
 
-    player_action = ['haipai', 'tsumo', 'sutehai', 'richi', 'say', 'open', 'agari', 'point']
+    player_action = ['haipai', 'tsumo', 'sutehai', 'richi', 'say', 'point']
     game_df['player'] = game_df.apply(lambda x: x['args'][0] if x['cmd'] in player_action else None, axis=1)
 
-    hai_action = ['haipai', 'sutehai', 'open']
+    hai_action = ['haipai', 'sutehai']
     game_df['hai'] = game_df.apply(lambda x: x['args'][1] if x['cmd'] in hai_action else None, axis=1)
     game_df['hai'] = game_df.apply(lambda x: x['args'][2] if x['cmd'] == 'tsumo' else x['hai'], axis=1)
 
-    game_df['player'] = game_df.apply(lambda x: x['args'][1] if x['cmd'] == 'agari' else x['player'], axis=1)
+    game_df['player'] = game_df.apply(agari_player, axis=1)
 
     game_df['gameid'] = game_df['gameid'].fillna(method="ffill")
     game_df['kyokuid'] = game_df['kyokuid'].fillna(method="ffill")
@@ -80,7 +87,7 @@ class TehaiGenerator():
         for index, row in df.iterrows():
             if row['cmd'] == 'kyokustart':
                 self.clear()
-            if row['cmd'] in ['tsumo', 'sutehai', 'haipai']:
+            if row['cmd'] in ['tsumo', 'sutehai', 'haipai', 'agari']:
                 player = row['player']
 
                 # hapiaは配牌後の状態を保持
@@ -101,6 +108,9 @@ class TehaiGenerator():
                 # tehaiは捨てた後の状態を保持
                 elif row['cmd'] == 'sutehai':
                     self.player_tehai[player].remove(row['hai'])
+                    df.at[index, 'tehai'] = self.player_tehai[player]
+
+                elif row['cmd'] == 'agari':
                     df.at[index, 'tehai'] = self.player_tehai[player]
 
         return df
